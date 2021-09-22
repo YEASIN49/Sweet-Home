@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect, useCallback} from 'react';
 import styled, {css} from 'styled-components/macro';
 import { Button } from './Button';
 import {TiArrowRight,TiArrowLeft, TiArrowRightThick} from 'react-icons/ti'
@@ -97,16 +97,19 @@ const arrowClass = 'btnArrow';
 
 const Hero = ({slideData}) => {
 
+
 	const [currentSlide, setCurrentSlide] = useState(slideData.length-1);
 	// console.log(`outside function ${currentSlide}`);
 		// currentSlide = 0;
-	const nextSlide = () => {
+	// const slideChangingTimer = useRef(null);
+
+	const nextSlide = useCallback(() => {
 		
 		// console.log(`before next ${currentSlide}`);
 		setCurrentSlide(currentSlide => currentSlide === slideData.length - 1 ? 0 : currentSlide + 1);
 		
 		// console.log(`after next ${currentSlide}`);
-	}
+	},[slideData.length]);
 	const prevSlide = () => {
 		// console.log(`before prev ${currentSlide}`);
 		setCurrentSlide(currentSlide => currentSlide === 0 ? slideData.length-1 : currentSlide - 1);
@@ -115,14 +118,41 @@ const Hero = ({slideData}) => {
 	}
 	// console.log(`outside function[after] ${currentSlide}`);
 
+
+	useEffect(
+		() => {
+			// slideChangingTimer.current = setTimeout(nextSlide,3000);
+			const slideShow = setTimeout(nextSlide,3000);
+			// console.log(slideChangingTimer.current);
+
+			return () => {
+				// if(slideChangingTimer.current){
+					// console.log(`clear imeout ${slideChangingTimer.current}`);
+					clearTimeout(slideShow);
+				// }
+				
+			}
+
+		},
+		[currentSlide,nextSlide]
+	);
+
+	
+	
+	// function test(){
+	// 	console.log("Still On");
+	// }
+
 	return (
 		<HeroSection>
 			<HeroWrapper>
 				{slideData.map((slide,index) => {
 					return(
 						<div key={index}>
+						
 							{currentSlide === index && (
 								<div>
+								
 									<HeroImg src={slide.image} alt={slide.alt}/>
 									<HeroContent>
 										<h2>{slide.title}</h2>
