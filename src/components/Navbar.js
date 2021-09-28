@@ -3,7 +3,7 @@
  import {Link} from 'react-router-dom';
  import { menuData } from '../data/MenuData';
  import { Button } from './Button';
- import {TiThMenuOutline as MenuBarIcon} from 'react-icons/ti'  
+ import {CgClose, CgMenuRight } from 'react-icons/cg' ;   
  
  const navLink = css`
  	height:100%;
@@ -23,7 +23,6 @@
 	 z-index: 99;
 	display: flex;
 	justify-content: space-between;
-	// background-color: black;
 	background-color: gray;
 	height: 60px;
 	padding: 0;
@@ -32,9 +31,11 @@
 
  const Logo = styled(Link)`
 	 ${navLink};
+	 font-family: 'Zen Tokyo Zoo', cursive;
+	 font-size: 24px;
  `;
  
- const MenuBars = styled(MenuBarIcon)`
+ const MenuBars = styled.div`
  	display: none;
 
 	 @media screen and (max-width: 768px){
@@ -54,42 +55,77 @@
 	align-items: center;
 
 	@media screen and (max-width: 768px){
-		display:none;
+		// display:none;
+		position: absolute;
+		top: 100%;
+		flex-direction: column;
+		justify-content:center;
+		background: #CD853F;
+		width:100%;
+		height: 100vh;
+		margin: 0;
+		z-index: 1;
+		transition: 0.3s ease-in-out;
+		left: ${({isDropdownOpen}) => (isDropdownOpen ? '0' : '-100vw' )};
+		
 	}
 `;
 
  const NavMenuLinks = styled(Link)`
 	 ${navLink};
 	 
+	 @media screen and (max-width: 768px){
+		 
+		 padding: 10px;
+		 height: 40px;
+		 width: 100%;
+		 margin: 10px 0;
+		 text-align: center;
+		 display: block;
+		 &:first-child{
+			 margin-top:-250px;
+		 }
+		 &:hover{
+			 color: black;
+		 }
+	 }
 	//  flex-flow: row nowrap;
  `;
 
  const NavBtn = styled.div`
- 	display: flex;
+	 display: flex;
 	 align-items: center;
 	 margin-right: 20px;
 	 
 	 @media screen and (max-width: 768px){
-		display:none;
+		// display:none;
+		// align-items: flex-end;
+		position: absolute;
+		bottom: -70vh;
+		z-index: 1;
+		transform: translateX(-50%);
+		transition: 0.3s ease-in-out;
+		left: ${({isDropdownOpen}) => (isDropdownOpen ? '50%' : '-100vw' )};
 	}
  `;
 
- const Navbar = () => {
+ const Navbar = ({toggleDropdown, isDropdownOpen}) => {
 	 return( 
 			<Nav>
 				<Logo to="./">SweetHome</Logo>
-				<MenuBars >
-					<MenuBarIcon />
+				<MenuBars onClick={toggleDropdown}>
+				{isDropdownOpen ? <CgClose /> : <CgMenuRight /> }
 				</MenuBars>
-				<NavMenu> 
+				<NavMenu isDropdownOpen = {isDropdownOpen}> 
 					{menuData.map((item, index) => (
 						<NavMenuLinks to={item.link} key = {index} >
 						{item.title}
 						</NavMenuLinks>
 					))}
 				</NavMenu>
-				<NavBtn> 
-					<Button to="/contact" primary="true">
+				
+				<NavBtn isDropdownOpen={isDropdownOpen}> 
+					<Button to="/contact" primary="true" >
 						Contact Us
 					</Button>
 				</NavBtn>

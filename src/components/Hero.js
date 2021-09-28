@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react';
 import styled, {css} from 'styled-components/macro';
 import { Button } from './Button';
-import {TiArrowRight,TiArrowLeft, TiArrowRightThick} from 'react-icons/ti'
+import {TiArrowRight,TiArrowLeft, TiArrowRightThick} from 'react-icons/ti';
 
 
 const HeroSection = styled.div`
@@ -15,7 +15,6 @@ const HeroWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items:center;
-	
 `;
 // const HeroSliderContainer = styled.div`
 
