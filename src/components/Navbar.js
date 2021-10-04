@@ -13,7 +13,7 @@
 	// line-height: 60px;
 	display: flex;
 	align-items: center;
-	padding: 0 1rem;
+	padding: 0 1.5rem;
 	cursor; pointer;
 
  `;

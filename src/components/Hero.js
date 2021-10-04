@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import styled, {css} from 'styled-components/macro';
 import { Button } from './Button';
 import {TiArrowRight,TiArrowLeft, TiArrowRightThick} from 'react-icons/ti';
@@ -16,8 +16,9 @@ const HeroWrapper = styled.div`
 	justify-content: center;
 	align-items:center;
 `;
-// const HeroSliderContainer = styled.div`
-
+const HeroContainer = styled.div`
+	opacity: 0;
+	transition: 0.5s;
 // `;
 // const HeroSlider = styled.div`
 	
@@ -94,42 +95,47 @@ const PrevArrow = styled(TiArrowLeft)`
 const arrowClass = 'btnArrow';
 
 
+
+
 const Hero = ({slideData}) => {
 
+	const currentSlideRef = useRef(null);
 
 	const [currentSlide, setCurrentSlide] = useState(slideData.length-1);
-	// console.log(`outside function ${currentSlide}`);
-		// currentSlide = 0;
-	// const slideChangingTimer = useRef(null);
+	
 
 	const nextSlide = useCallback(() => {
 		
-		// console.log(`before next ${currentSlide}`);
 		setCurrentSlide(currentSlide => currentSlide === slideData.length - 1 ? 0 : currentSlide + 1);
 		
-		// console.log(`after next ${currentSlide}`);
 	},[slideData.length]);
 	const prevSlide = () => {
-		// console.log(`before prev ${currentSlide}`);
 		setCurrentSlide(currentSlide => currentSlide === 0 ? slideData.length-1 : currentSlide - 1);
 		
-		// console.log(`after prev ${currentSlide}`);
 	}
-	// console.log(`outside function[after] ${currentSlide}`);
 
 
 	useEffect(
 		() => {
-			// slideChangingTimer.current = setTimeout(nextSlide,3000);
-			const slideShow = setTimeout(nextSlide,3000);
-			// console.log(slideChangingTimer.current);
-
+			const currentElem = currentSlideRef.current;
+			currentElem.style.opacity = '1';
+			console.log(currentSlideRef.current);
 			return () => {
-				// if(slideChangingTimer.current){
-					// console.log(`clear imeout ${slideChangingTimer.current}`);
+				currentElem.style.opacity = '1';
+			};
+		},[currentSlide]
+	);
+
+	useEffect(
+		
+		() => {
+			// currentSlideRef.current.style.opacity = 1;
+			const slideShow = setTimeout(nextSlide,3000);
+
+			// currentSlideRef.current.style.opacity = 1;
+			// console.log(currentSlideRef.current);
+			return () => {
 					clearTimeout(slideShow);
-				// }
-				
 			}
 
 		},
@@ -137,36 +143,29 @@ const Hero = ({slideData}) => {
 	);
 
 	
-	
-	// function test(){
-	// 	console.log("Still On");
-	// }
 
 	return (
 		<HeroSection>
 			<HeroWrapper>
 				{slideData.map((slide,index) => {
 					return(
-						<div key={index}>
+						<div key={index}  >
 						
 							{currentSlide === index && (
-								<div>
+								<HeroContainer ref={currentSlideRef}>
 								
 									<HeroImg src={slide.image} alt={slide.alt}/>
 									<HeroContent>
-										<h2>{slide.title}</h2>
-										<p>{slide.price}</p>
+										<h2 >{slide.title}</h2>
+										<p >{slide.price}</p>
 										<Button to={slide.path}  
 											primary='true'
 											css={`
 											font-size: 15px;
-											// font-weight: bold;
-											// text-transform: uppercase;
 											line-height:18px;
 											background-color: #8FD9A8;
 											vertical-align: middle;
 											border-radius: 50px;
-											// color: black;
 											font-weight: bold;
 											height:18px;
 											&:hover {
@@ -195,7 +194,7 @@ const Hero = ({slideData}) => {
 											className={arrowClass} />
 										</Button>
 									</HeroContent>
-								</div>
+								</HeroContainer>
 							)}
 
 							

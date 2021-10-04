@@ -3,8 +3,11 @@ import Navbar from './components/Navbar'
 import GlobalStyle from './globalStyle';
 import Hero from './components/Hero';
 import { HeroSliderData } from './data/HeroSliderData';
-import Dropdown from './components/Dropdown';
 import InfoSection from './components/InfoSection';
+import  InfoData  from './data/InfoData'
+import StatusBar from './components/StatusBar';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -12,15 +15,24 @@ function App() {
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
-    console.log(isDropdownOpen);
   }
+
+  let renderInfoSectionConditionally = null;
+
+  renderInfoSectionConditionally = (
+    <InfoSection infoSectionData={InfoData}/>
+  );
+
 
   return (
     <div className="App">
-    <GlobalStyle />
+      <GlobalStyle />
       <Navbar isDropdownOpen={isDropdownOpen} toggleDropdown = {toggleDropdown} />
       <Hero slideData = {HeroSliderData}/>
-      <InfoSection></InfoSection>
+      {renderInfoSectionConditionally}
+      <StatusBar />
+      <Contact />
+      <Footer />
     </div>
   );
 }
