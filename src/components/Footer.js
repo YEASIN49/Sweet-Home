@@ -9,6 +9,7 @@ const FooterWrapper = styled.section`
 	color: #a7b6ca;
 `;
 const FooterContent = styled.div`
+	padding-top: 30px;
 	display: flex;
 	justify-content: space-around;
 	flex-wrap: nowrap;
@@ -42,6 +43,7 @@ const FooterColumnHeader = styled.div`
 const ContactInfo = styled.div`
 	width: 100%;
 	padding-right: 15px;
+
 
 	span{
 		padding: 5px;

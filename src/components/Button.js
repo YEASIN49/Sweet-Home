@@ -23,4 +23,3 @@ export const Button = styled(Link)`
 	}
 
 	`;
-

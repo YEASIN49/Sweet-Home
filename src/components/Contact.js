@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import {FaFacebookF,FaInstagram,FaTwitter,FaYoutube} from "react-icons/fa";
 
 const Section = styled.section`
 	display: flex;

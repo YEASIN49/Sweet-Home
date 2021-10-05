@@ -79,7 +79,8 @@ const ImgContainer = styled.div`
 `;
 
 const InfoImg = styled.img`
-	max-height: 85vh;
+	height: 85vh;
+	width: fit-content;
 	margin: 5px;
 	
 	
