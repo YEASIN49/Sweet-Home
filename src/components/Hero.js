@@ -119,7 +119,7 @@ const Hero = ({slideData}) => {
 		() => {
 			const currentElem = currentSlideRef.current;
 			currentElem.style.opacity = '1';
-			console.log(currentSlideRef.current);
+			// console.log(currentSlideRef.current);
 			return () => {
 				currentElem.style.opacity = '1';
 			};
@@ -154,7 +154,11 @@ const Hero = ({slideData}) => {
 							{currentSlide === index && (
 								<HeroContainer ref={currentSlideRef}>
 								
-									<HeroImg src={slide.image} alt={slide.alt}/>
+									<HeroImg  
+										srcSet={`${slide.image_small}  375w, ${slide.image} 1920w`}
+										sizes="(max-width: 576px) 375px, 1920px" 
+										alt={slide.alt} 
+										src={slide.image}/>
 									<HeroContent>
 										<h2 >{slide.title}</h2>
 										<p >{slide.price}</p>

@@ -1,7 +1,11 @@
 import heroOne from '../images/hero-1.jpg';
+import heroOne_small from '../images/hero-1_small.jpg';
 import heroTwo from '../images/hero-2.jpg';
+import heroTwo_small from '../images/hero-2_small.jpg';
 import heroThree from '../images/hero-3.jpg';
+import heroThree_small from '../images/hero-3_small.jpg';
 import heroFour from '../images/hero-4.jpg';
+import heroFour_small from '../images/hero-4_small.jpg';
 export const HeroSliderData = [
 	{
 		title: 'Villa One',
@@ -9,6 +13,7 @@ export const HeroSliderData = [
 		path: '/homes',
 		label: 'View 1',
 		image: heroOne,
+		image_small: heroOne_small,
 		alt: 'House For Sale'
 	},
 	{
@@ -17,6 +22,7 @@ export const HeroSliderData = [
 		path: '/homes',
 		label: 'View 2',
 		image: heroTwo,
+		image_small: heroTwo_small,
 		alt: 'House For Sale'
 	},
 	{
@@ -25,6 +31,7 @@ export const HeroSliderData = [
 		path: '/homes',
 		label: 'View 3',
 		image: heroThree,
+		image_small: heroThree_small,
 		alt: 'House For Sale'
 	},
 	{
@@ -33,6 +40,7 @@ export const HeroSliderData = [
 		path: '/homes',
 		label: 'View 4',
 		image: heroFour,
+		image_small: heroFour_small,
 		alt: 'House For Sale'
 	}
 ];

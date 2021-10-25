@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React,{useEffect, useState, useRef} from 'react';
 import styled from 'styled-components';
 
 const Section = styled.section`
@@ -128,36 +128,125 @@ const Section = styled.section`
 
 const StatusBar = () => {
 
-	const [timer, setTimer] = useState(0);
+	const [clientCount, setClientCount] = useState(0);
+	const [propertyCount, setPropertyCount] = useState(0);
+	const [projectCount, setProjectCount] = useState(0);
 	// const [shouldStart, setShouldStart] = useState(true);
+	const statusBarRef = useRef(null);
+	const intervalPointerRef = useRef();
+	const propertyCountRef = useRef();
+	const projectCountRef = useRef();
+
+	// useEffect(() => {
+	// 	let interval = null;
+	// 	if(timer <= 450-10){
+			
+	// 		interval = setInterval(() => {
+	// 			setTimer((timer) => timer + 10);
+	// 		}, 10);
+			
+	// 	}
+	// 	else{
+	// 		// setShouldStart(false);
+	// 		clearInterval(interval);
+	// 	}
+	// 	return() => {
+	// 		clearInterval(interval);			
+	// 	}
+	// },[timer]);
+
+
+
+	const countAdder = () => {
+		setClientCount((clientCount) => clientCount + 10);
+		console.log(`yes B[statusBar]  ${clientCount}` );
+	}
+	const propertyAdder = () => {
+		setPropertyCount((propertyCount) => propertyCount + 10);
+		console.log(` [propertyAdder] => [statusBar]  ${propertyCount}` );
+	}
+	const projectAdder = () => {
+		setProjectCount((projectCount) => projectCount + 10);
+		console.log(` [projectAdder] => [statusBar]  ${projectCount}` );
+	}
+
+
+	const handleIntersect = (entries) => {
+		console.log(" [handleIntersect] => [statusBar]");
+		
+		entries.forEach((entry) => {
+			
+			if(entry.isIntersecting){
+				intervalPointerRef.current = setInterval(() => {
+					countAdder();
+
+					console.log(`yes A[statusBar]  ${clientCount}` );
+					
+				}, 25);
+
+				propertyCountRef.current = setInterval(()=>{
+					propertyAdder();
+				},15);
+				projectCountRef.current = setInterval(()=>{
+					projectAdder();
+				},70);
+				// observer.unobserve(statusBarRef.current);	
+				observer.disconnect();					
+			}
+		});
+	}
+
+	// console.log(`${document.querySelector('#holder')} is root`);
+	var observer;
+	const createObserver = () => {
+		
+	
+		let options = {
+			root: null,
+			rootMargin: "-150px",
+			threshhold: 1//[0, 0.25, 0.5, 0.75, 1]	
+		};
+
+		observer = new IntersectionObserver(handleIntersect, options);
+		observer.observe(statusBarRef.current);
+		// observer.observe(propertyCountRef.current);
+		
+		// observer.observe(lazyTextRef.current);
+	}
 
 	useEffect(() => {
-		let interval = null;
-		if(timer <= 450-10){
-			
-			interval = setInterval(() => {
-				setTimer((timer) => timer + 10);
-			}, 10);
+		if(clientCount >= 420){
+			clearInterval(intervalPointerRef.current);
 			
 		}
-		else{
-			// setShouldStart(false);
-			clearInterval(interval);
+		if(propertyCount >= 1200){
+			clearInterval(propertyCountRef.current);	
 		}
-		return() => {
-			clearInterval(interval);			
+		if(projectCount >= 150){
+			clearInterval(projectCountRef.current);	
 		}
-	},[timer]);
+	
+		
+	},[clientCount, propertyCount, projectCount]);
+
+	useEffect(() => {
+		createObserver();
+		console.log(`insdie ===> [createObserver useEffect : (StatusBar.js)]`);
+	
+			return () => (IntersectionObserver.disconnect());
+	},[]);
+
+
 	
 	return(
-		<Section>
+		<Section ref={statusBarRef}>
 			<div>
-				<p className="border-gradient border-gradient-purple">{timer}+</p>
+				<p className="border-gradient border-gradient-purple">{clientCount}+</p>
 				<p className="statusDescription">Happy Client</p>
 			</div>
 			<span className="divider">|</span>
 			<div>
-				<p className="statusDigit">1200+</p>
+				<p className="statusDigit">{propertyCount}+</p>
 				<p className="statusDescription">Active Property</p>	 
 			</div>
 			<span className="divider">|</span>
@@ -167,7 +256,7 @@ const StatusBar = () => {
 			</div>
 			<span className="divider">|</span>
 			<div>
-				<p className="border-gradient border-gradient-purple">150+</p>
+				<p className="border-gradient border-gradient-purple">{projectCount}+</p>
 				<p className="statusDescription">Ongoing Project</p>	 
 			</div>
 		</Section>

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components/macro';
 import {Button} from './Button';
+// import { useEffect, useRef } from 'react/cjs/react.development';
 
 
 
@@ -16,6 +17,8 @@ const TextContent = styled.div`
 	justify-content: center;
 	width: 45vw;
 	padding: 10px;
+	opacity:0;
+	transform: translateX(100%);
 
 	p{
 		font-family: 'Roboto', sans-serif;
@@ -31,7 +34,7 @@ const TextContent = styled.div`
 		padding: 15px;
 
 		p{
-			padding-left: 5px;
+			padding-left: 10px;
 		}
 
 	}
@@ -39,6 +42,9 @@ const TextContent = styled.div`
 
 `;
 const ImgContainer = styled.div`
+	opacity: 0;
+	transform: scale(0);
+
 	span{
 		display: none;
 	}
@@ -92,8 +98,9 @@ const InfoImg = styled.img`
 	}
 
 	@media screen and (max-width: 576px){
-		max-width: 85%;
+		max-width: 90%;
 		max-height: 100%;
+		width: 95vw;
 		border-radius: 0;
 		box-shadow: none;
 		margin: 0 auto;
@@ -111,9 +118,78 @@ const InfoImg = styled.img`
 
 
 const InfoSectionContent = (props) => {
+
+
+	const lazyImageRef = useRef(null);
+	const lazyTextRef = useRef(null);
+
+
+
+	// let currentOpacity = 0.0;
+	const handleIntersect = (entries) => {
+		console.log(" <- rendered times");
+		
+		entries.forEach((entry) => {
+			console.log(entry.target.className.includes('ImgContainer'));
+			console.log(`inside handleInterSection FOREACH => ${entry.isIntersecting}`);
+			if (entry.isIntersecting) {
+				console.log(`inside of IF of handleIntersect => [opacity Before: ${entry.target.style.opacity}]`);
+
+				// ReactDOM.findDOMNode(entry.target).getElementsByClassName('snap') // Returns the elements
+				entry.target.style.transition = '0.6s ease-out';
+				
+				if(entry.target.className.includes('ImgContainer')){
+					
+					entry.target.style.transform = 'scale(1)';
+					observerGlobal.unobserve(entry.target);	
+					console.log("Should observe twice");
+				}
+				else{
+					// entry.target.style.transition = '0.6s ease-out';
+					entry.target.style.transform = 'translateX(0)';
+					observerGlobal.unobserve(entry.target);	
+					// entry.target.style.opacity = 1;
+				}
+				entry.target.style.opacity = 1;
+				
+				console.log(`inside of IF of handleIntersect => [opacity Before: ${entry.target.style.opacity}]`);
+				
+			} 
+
+		}
+		);
+		// observerGlobal.disconnect();
+	}
+
+	console.log(`${document.querySelector('#holder')} is root`);
+	let observerGlobal;
+	const createObserver = () => {
+		let observer;
+	
+		let options = {
+			root: null,
+			rootMargin: '0px',
+			threshhold: 1 //[0, 0.25, 0.5, 0.75, 1]	
+		};
+
+		observer = new IntersectionObserver(handleIntersect, options);
+		observerGlobal = observer;
+		observer.observe(lazyImageRef.current);
+		observer.observe(lazyTextRef.current);
+	}
+	
+
+	useEffect(() => {
+		createObserver();
+		console.log(`insdie ===> [createObserver useEffect]`);
+		
+	},[]);
+
+	
 	return (
 	
 		<InfoContainer 
+			
 			css = {`
 				flex-direction: ${props.content.reverse ? 'row-reverse' : 'row'};
 
@@ -126,7 +202,7 @@ const InfoSectionContent = (props) => {
 			`}
 
 		>
-			<TextContent>
+			<TextContent ref={lazyTextRef}>
 				<h2 css={`margin: 10px 0`}>{props.content.heading}</h2>
 				<p>{props.content.paragraph}</p>
 				<Button 
@@ -158,8 +234,10 @@ const InfoSectionContent = (props) => {
 				`}
 				>View</Button>
 			</TextContent>
-			<ImgContainer style={{position: 'relative'}}>
-				<InfoImg src={props.content.image} />
+			<ImgContainer ref={lazyImageRef} style={{position: 'relative'}}>
+				<InfoImg srcSet={`${props.content.image_small}  375w, ${props.content.image} 1920w`}
+					sizes="(max-width: 768px) 375px, 1920px" 
+					src={props.content.image} />
 				<span>Luxury Interior</span>
 			</ImgContainer>
 		</InfoContainer>

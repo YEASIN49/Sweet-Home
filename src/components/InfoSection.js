@@ -6,6 +6,7 @@ const Section = styled.section`
 	width: 80%;
 	margin: 0 auto;
 	padding-bottom: 5px;
+	// background-color: rgba(0,0,0,0.125);
 
 	@media screen and (max-width: 991px){
 		width: 95%;
@@ -17,18 +18,23 @@ const Section = styled.section`
 
 
 const InfoSection = (props) => {
+
+	
 	
 	return (
-		<Section>
+		<Section >
+			
 			{props.infoSectionData.map((infoData, index) => {
 				return(
 					<InfoSectionContent 
 						content = {infoData}
 						key = {index}
-
+						// ref={lazyChildTargetRef}
+						
 					/>
 				);
 			})}
+
 			
 		</Section>
 	);
