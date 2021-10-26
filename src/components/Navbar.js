@@ -1,8 +1,9 @@
  import React from 'react';
  import styled, {css} from 'styled-components/macro'; 
  import {Link} from 'react-router-dom';
+ import {Link as ScrollLink} from 'react-scroll';
  import { menuData } from '../data/MenuData';
- import { Button } from './Button';
+//  import { Button } from './Button';
  import {CgClose, CgMenuRight } from 'react-icons/cg' ;   
  
  const navLink = css`
@@ -14,8 +15,7 @@
 	display: flex;
 	align-items: center;
 	padding: 0 1.5rem;
-	cursor; pointer;
-
+	cursor: pointer;
  `;
 
  const Nav = styled.nav`
@@ -71,9 +71,9 @@
 	}
 `;
 
- const NavMenuLinks = styled(Link)`
+ const NavMenuLinks = styled.div`
 	 ${navLink};
-	 
+	
 	 @media screen and (max-width: 768px){
 		 
 		 padding: 10px;
@@ -109,7 +109,30 @@
 	}
  `;
 
+ const NavBtnContact = styled.div`
+	background: #000d1a;
+	white-space: none;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	min-width: 100px;
+	max-width: 200px;
+	text-decoration: none;
+	transition: 0.3s;
+	text-align: center;
+	padding: 14px 24px;
+	color: #fff;
+	font-size: 14px;
+	
+
+	&:hover {
+		transform: translateY(-2px);
+	}
+
+	`;
+
  const Navbar = ({toggleDropdown, isDropdownOpen}) => {
+	 
 	 return( 
 			<Nav>
 				<Logo to="./">SweetHome</Logo>
@@ -118,16 +141,33 @@
 				</MenuBars>
 				<NavMenu isDropdownOpen = {isDropdownOpen}> 
 					{menuData.map((item, index) => (
-						<NavMenuLinks to={item.link} key = {index} >
-						{item.title}
+						
+						<NavMenuLinks key = {index}>
+							<ScrollLink 
+								// isDropdownOpen = {isDropdownOpen}
+								// to={isDropdownOpen && item.link==="homes" ? onclick={toggleDropdown} : item.link} 
+								to={item.link}
+								smooth={true}
+								duration={500}
+								
+							>
+							{item.title}
+							</ScrollLink>
 						</NavMenuLinks>
 					))}
 				</NavMenu>
 				
 				<NavBtn isDropdownOpen={isDropdownOpen}> 
-					<Button to="/contact" primary="true" >
-						Contact Us
-					</Button>
+					<NavBtnContact> 
+					<ScrollLink 
+						to="appointment"
+						smooth={true}
+						duration={500}
+					>
+					Contact Us
+					</ScrollLink>
+						
+					</NavBtnContact>
 				</NavBtn>
 				
 			</Nav>

@@ -2,6 +2,7 @@ import React,{useState, Suspense, lazy} from 'react';
 import Navbar from './components/Navbar'
 import GlobalStyle from './globalStyle';
 import Hero from './components/Hero';
+import {BrowserRouter as Router} from "react-router-dom";
 import { HeroSliderData } from './data/HeroSliderData';
 // import InfoSection from './components/InfoSection';
 import  InfoData  from './data/InfoData'
@@ -27,7 +28,7 @@ function App() {
  
 
   return (
-    
+    <Router>
       <div className="App">
         <GlobalStyle />
         <Navbar isDropdownOpen={isDropdownOpen} toggleDropdown = {toggleDropdown} />
@@ -44,8 +45,8 @@ function App() {
         <Suspense fallback={<div> footerLoading...</div>}>
           <Footer />
         </Suspense>
-    
       </div> 
+    </Router>  
   );
 }
 

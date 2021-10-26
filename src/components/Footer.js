@@ -107,7 +107,6 @@ const AllSocialSvg = styled.div`
 	margin-bottom: 20px;
 	
 	
-
 	a{	
 		width: 30px;
 		line-height: 18px;
@@ -145,10 +144,10 @@ const Footer = () => {
 					<br />
 					<PhoneSvg /><span>+123456789</span>
 				 	<AllSocialSvg>
-						<a href="#"><FaFacebookF /></a>
-						<a href="#"><FaInstagram /></a>
-						<a href="#"><FaTwitter /></a> 
-						<a href="#"><FaYoutube /></a>
+						<a href="./"><FaFacebookF /></a>
+						<a href="./"><FaInstagram /></a>
+						<a href="./"><FaTwitter /></a> 
+						<a href="./"><FaYoutube /></a>
 					</AllSocialSvg>	
 				</ContactInfo>
 				<Service>

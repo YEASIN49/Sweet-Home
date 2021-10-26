@@ -92,7 +92,7 @@ const InfoImg = styled.img`
 	
 	@media screen and (max-width: 768px){
 		max-height: 60vh;
-		box-shadow: 5px 5px 0 5px red;
+		box-shadow: 5px 5px 0 5px #150050;
 		border-bottom-left-radius: 50%;
 		border-top-right-radius: 50%;
 	}
@@ -125,24 +125,19 @@ const InfoSectionContent = (props) => {
 
 
 
-	// let currentOpacity = 0.0;
 	const handleIntersect = (entries) => {
-		console.log(" <- rendered times");
 		
 		entries.forEach((entry) => {
-			console.log(entry.target.className.includes('ImgContainer'));
-			console.log(`inside handleInterSection FOREACH => ${entry.isIntersecting}`);
+			
 			if (entry.isIntersecting) {
-				console.log(`inside of IF of handleIntersect => [opacity Before: ${entry.target.style.opacity}]`);
-
-				// ReactDOM.findDOMNode(entry.target).getElementsByClassName('snap') // Returns the elements
+				
 				entry.target.style.transition = '0.6s ease-out';
 				
 				if(entry.target.className.includes('ImgContainer')){
 					
 					entry.target.style.transform = 'scale(1)';
 					observerGlobal.unobserve(entry.target);	
-					console.log("Should observe twice");
+					// console.log("Should observe twice");
 				}
 				else{
 					// entry.target.style.transition = '0.6s ease-out';
@@ -152,7 +147,7 @@ const InfoSectionContent = (props) => {
 				}
 				entry.target.style.opacity = 1;
 				
-				console.log(`inside of IF of handleIntersect => [opacity Before: ${entry.target.style.opacity}]`);
+				// console.log(`inside of IF of handleIntersect => [opacity Before: ${entry.target.style.opacity}]`);
 				
 			} 
 
@@ -161,7 +156,7 @@ const InfoSectionContent = (props) => {
 		// observerGlobal.disconnect();
 	}
 
-	console.log(`${document.querySelector('#holder')} is root`);
+	// console.log(`${document.querySelector('#holder')} is root`);
 	let observerGlobal;
 	const createObserver = () => {
 		let observer;
@@ -181,7 +176,7 @@ const InfoSectionContent = (props) => {
 
 	useEffect(() => {
 		createObserver();
-		console.log(`insdie ===> [createObserver useEffect]`);
+		// console.log(`insdie ===> [createObserver useEffect]`);
 		
 	},[]);
 

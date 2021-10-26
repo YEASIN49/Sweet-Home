@@ -137,42 +137,24 @@ const StatusBar = () => {
 	const propertyCountRef = useRef();
 	const projectCountRef = useRef();
 
-	// useEffect(() => {
-	// 	let interval = null;
-	// 	if(timer <= 450-10){
-			
-	// 		interval = setInterval(() => {
-	// 			setTimer((timer) => timer + 10);
-	// 		}, 10);
-			
-	// 	}
-	// 	else{
-	// 		// setShouldStart(false);
-	// 		clearInterval(interval);
-	// 	}
-	// 	return() => {
-	// 		clearInterval(interval);			
-	// 	}
-	// },[timer]);
-
 
 
 	const countAdder = () => {
 		setClientCount((clientCount) => clientCount + 10);
-		console.log(`yes B[statusBar]  ${clientCount}` );
+		// console.log(`yes B[statusBar]  ${clientCount}` );
 	}
 	const propertyAdder = () => {
 		setPropertyCount((propertyCount) => propertyCount + 10);
-		console.log(` [propertyAdder] => [statusBar]  ${propertyCount}` );
+		// console.log(` [propertyAdder] => [statusBar]  ${propertyCount}` );
 	}
 	const projectAdder = () => {
 		setProjectCount((projectCount) => projectCount + 10);
-		console.log(` [projectAdder] => [statusBar]  ${projectCount}` );
+		// console.log(` [projectAdder] => [statusBar]  ${projectCount}` );
 	}
 
 
 	const handleIntersect = (entries) => {
-		console.log(" [handleIntersect] => [statusBar]");
+		// console.log(" [handleIntersect] => [statusBar]");
 		
 		entries.forEach((entry) => {
 			
@@ -180,7 +162,7 @@ const StatusBar = () => {
 				intervalPointerRef.current = setInterval(() => {
 					countAdder();
 
-					console.log(`yes A[statusBar]  ${clientCount}` );
+					// console.log(`yes A[statusBar]  ${clientCount}` );
 					
 				}, 25);
 
@@ -231,9 +213,9 @@ const StatusBar = () => {
 
 	useEffect(() => {
 		createObserver();
-		console.log(`insdie ===> [createObserver useEffect : (StatusBar.js)]`);
+		// console.log(`insdie ===> [createObserver useEffect : (StatusBar.js)]`);
 	
-			return () => (IntersectionObserver.disconnect());
+			return () => (observer.disconnect());
 	},[]);
 
 

@@ -19,10 +19,8 @@ const HeroWrapper = styled.div`
 const HeroContainer = styled.div`
 	opacity: 0;
 	transition: 0.5s;
-// `;
-// const HeroSlider = styled.div`
-	
-// `;
+ `;
+
 const HeroImg = styled.img`
 	position: absolute;
 	top: 0;
@@ -50,7 +48,6 @@ const HeroContent = styled.div`
 	}
 	p{
 		font-size: clamp(1rem, 4vw, 1.2rem);
-		// font-weight: bold;
 		margin-bottom: 25px;
 	}
 	
@@ -60,9 +57,6 @@ const SliderButton = styled.div`
 	position: absolute;
 	bottom: 3%;
 	right: 3%;
-	// background-color: red;
-	// margin-top: 20px;
-	
 `;
 
 const PrevNextArrow = css`
@@ -75,7 +69,6 @@ const PrevNextArrow = css`
 	margin: 10px;
 	user-select: none;
 	transition: 0.3s;
-	// z-index:3;
 
 	&:hover{
 		background-color: #cd853f;
@@ -145,7 +138,7 @@ const Hero = ({slideData}) => {
 	
 
 	return (
-		<HeroSection>
+		<HeroSection id="homes">
 			<HeroWrapper>
 				{slideData.map((slide,index) => {
 					return(
@@ -177,7 +170,6 @@ const Hero = ({slideData}) => {
 												color: white;
 												
 												.btnArrow{
-													// transition: 0.3s;
 													margin-left: 20px;
 												}
 											}
@@ -192,7 +184,6 @@ const Hero = ({slideData}) => {
 												font-size: 18px;
 												vertical-align: middle;
 												margin-bottom: 3px;
-												// background-color: red;
 												border-radius: 50%;
 											`} 
 											className={arrowClass} />

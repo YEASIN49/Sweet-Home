@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import GoogleMap from './GoogleMap'
 
 const Section = styled.section`
 	display: flex;
@@ -13,9 +14,7 @@ const Section = styled.section`
 `;
 const FormContainer = styled.div`
 	width: 40%;
-	// background: rgba(0,0,0,0.1);
 	h2{
-		// font-weight: 600;
 		font-family: 'Roboto', sans-serif;
 		margin-bottom: 15px;
 	}
@@ -23,10 +22,8 @@ const FormContainer = styled.div`
 	label{
 		display: block;
 		width: 90%;
-		// background-color: red;
 		padding: 5px 10px 10px 5px;
 		margin: auto;
-		// margin-top: 10px;
 		font-weight: 400;
 		font-family: 'Roboto', sans-serif;
 	}
@@ -65,8 +62,6 @@ const FormContainer = styled.div`
 `;
 const MapContainer = styled.div`
 	width: 40%;
-	height: 300px;
-	background: gray;
 
 	h2{
 		font-family: 'Roboto', sans-serif;
@@ -82,7 +77,7 @@ const MapContainer = styled.div`
 
 const Contact = () => {
 	return(
-		<Section>
+		<Section id='appointment'>
 			<FormContainer>
 				<h2>Book an appointment with us !</h2>
 				<label>Your Name :</label>
@@ -97,6 +92,7 @@ const Contact = () => {
 			</FormContainer>
 			<MapContainer>
 				<h2>Find us on map !</h2>
+				<GoogleMap />
 			</MapContainer>
 		</Section>
 	);
