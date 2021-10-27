@@ -185,7 +185,7 @@ const StatusBar = () => {
 	
 		let options = {
 			root: null,
-			rootMargin: "-250px ",
+			rootMargin: "-100px",
 			threshhold: 1//[0, 0.25, 0.5, 0.75, 1]	
 		};
 

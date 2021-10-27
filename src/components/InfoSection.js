@@ -4,13 +4,12 @@ import InfoSectionContent from './InfoSectionContent';
 
 const Section = styled.section`
 	width: 80%;
+	height: 95%;
 	margin: 0 auto;
 	padding-bottom: 5px;
 
 	@media screen and (max-width: 991px){
 		width: 95%;
-
-		
 
 	}
 `;

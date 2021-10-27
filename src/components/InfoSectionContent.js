@@ -16,7 +16,7 @@ const TextContent = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	width: 45vw;
-	padding: 10px;
+	padding: 10px 25px;
 	opacity:0;
 	transform: translateX(100%);
 
@@ -27,7 +27,7 @@ const TextContent = styled.div`
 
 
 	@media screen and (max-width: 768px){
-		padding: 10px 5px;
+		padding: 10px 15px;
 	}
 	@media screen and (max-width: 576px){
 		width: 100vw;
@@ -108,6 +108,8 @@ const InfoImg = styled.img`
 	}
 
 	@media screen and (min-width: 768px){
+		max-width: 60vw;
+		max-height: 650px;
 		box-shadow: 5px 5px 0 5px #150050;
 		border-bottom-left-radius: 50%;
 		border-top-right-radius: 50%;
@@ -163,7 +165,7 @@ const InfoSectionContent = (props) => {
 	
 		let options = {
 			root: null,
-			rootMargin: '-150px',
+			rootMargin: '0px',
 			threshhold: 1 //[0, 0.25, 0.5, 0.75, 1]	
 		};
 

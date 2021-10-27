@@ -6,7 +6,7 @@ import {TiArrowRight,TiArrowLeft, TiArrowRightThick} from 'react-icons/ti';
 
 const HeroSection = styled.div`
 	height: 100vh;
-	max-height: 1100px;
+	// max-height: 1100px;
 	overflow: hidden;
 `;
 const HeroWrapper = styled.div`
