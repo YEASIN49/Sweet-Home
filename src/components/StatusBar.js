@@ -164,14 +164,14 @@ const StatusBar = () => {
 
 					// console.log(`yes A[statusBar]  ${clientCount}` );
 					
-				}, 25);
+				}, 50);
 
 				propertyCountRef.current = setInterval(()=>{
 					propertyAdder();
 				},15);
 				projectCountRef.current = setInterval(()=>{
 					projectAdder();
-				},70);
+				},95);
 				// observer.unobserve(statusBarRef.current);	
 				observer.disconnect();					
 			}
@@ -185,7 +185,7 @@ const StatusBar = () => {
 	
 		let options = {
 			root: null,
-			rootMargin: "-150px",
+			rootMargin: "-250px ",
 			threshhold: 1//[0, 0.25, 0.5, 0.75, 1]	
 		};
 
@@ -216,6 +216,7 @@ const StatusBar = () => {
 		// console.log(`insdie ===> [createObserver useEffect : (StatusBar.js)]`);
 	
 			return () => (observer.disconnect());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[]);
 
 

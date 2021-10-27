@@ -131,7 +131,7 @@ const InfoSectionContent = (props) => {
 			
 			if (entry.isIntersecting) {
 				
-				entry.target.style.transition = '0.6s ease-out';
+				entry.target.style.transition = '0.9s ease-out';
 				
 				if(entry.target.className.includes('ImgContainer')){
 					
@@ -163,7 +163,7 @@ const InfoSectionContent = (props) => {
 	
 		let options = {
 			root: null,
-			rootMargin: '0px',
+			rootMargin: '-150px',
 			threshhold: 1 //[0, 0.25, 0.5, 0.75, 1]	
 		};
 
@@ -177,7 +177,7 @@ const InfoSectionContent = (props) => {
 	useEffect(() => {
 		createObserver();
 		// console.log(`insdie ===> [createObserver useEffect]`);
-		
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[]);
 
 	
